@@ -55,15 +55,15 @@ See doc/COPYRIGHT.md for more details.
 <div id="my_project_blocks">
   <h3><%=l(:label_visible_elements) %></h3>
   <div id="visible-grid" class="widget-boxes">
-    <% top_fields.each do |f| %>
-      <%= grid_field f %>
-    <% end %>
-
     <div class="grid-block">
       <% middle_fields.each do |f| %>
         <%= grid_field f %>
       <% end %>
     </div>
+
+    <% top_fields.each do |f| %>
+      <%= grid_field f %>
+    <% end %>
   </div>
 
   <h3><%=l(:label_hidden_elements) %></h3>

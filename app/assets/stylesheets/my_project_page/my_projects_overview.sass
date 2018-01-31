@@ -41,3 +41,44 @@ div.overview
 
 .textile-form-wrapper
   padding-top: 50px
+
+table.highlighted-table
+  td
+    border-color: white
+
+
+  td.highlighted-cell
+    background: var(--primary-color)
+    color: var(--font-color-on-primary)
+
+    &.-centered
+      text-align: center !important
+
+// Project status
+td.project-status-cell
+  padding: 2px 0 0 0 !important
+  text-align: center !important
+
+.project-status
+  width: 30px
+  height: 30px
+  display: inline-block
+  border-radius: 50%
+
+  &.-red
+    background: #FF0402
+  &.-amber
+    background: #FEC105
+  &.-green
+    background: #94D150
+
+// Custom colored table
+table.colored-table
+  thead
+    th
+      background: var(--primary-color)
+      color: var(--font-color-on-primary)
+
+      .generic-table--sort-header-outer:hover
+        background: var(--primary-color-dark)
+        color: var(--font-color-on-primary-dark)

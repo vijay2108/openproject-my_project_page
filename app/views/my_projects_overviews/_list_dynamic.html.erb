@@ -1,0 +1,123 @@
+<%#-- copyright
+OpenProject is a project management system.
+Copyright (C) 2012-2017 the OpenProject Foundation (OPF)
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License version 3.
+
+OpenProject is a fork of ChiliProject, which is a fork of Redmine. The copyright follows:
+Copyright (C) 2006-2017 Jean-Philippe Lang
+Copyright (C) 2010-2013 the ChiliProject Team
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+See doc/COPYRIGHT.rdoc for more details.
+
+++#%>
+
+<%
+
+  def render_wp(property, work_package)
+    if property.match /cf_(\d+)/
+      return work_package.custom_value_for($1).formatted_value
+    end
+
+    case property.to_sym
+    when :start_date
+      format_date(work_package.start_date)
+    when :due_date
+      format_date(work_package.due_date)
+    when :project
+      link_to_project(work_package.project)
+    when :done_ratio
+      progress_bar(work_package.done_ratio, legend: work_package.done_ratio, hide_total_progress: true)
+    when :assigned_to
+      link_to_user(work_package.assigned_to)
+    when :responsible
+      link_to_user(work_package.responsible)
+    else
+      work_package.public_send property
+    end
+  rescue => e
+    "Failed to render: #{e.message}"
+  end
+
+  def render_column(name)
+    if name.match /cf_(\d+)/
+      CustomField.find($1).name
+    else
+      WorkPackage.human_attribute_name(name)
+    end
+  rescue => e
+    "Failed to render: #{e.message}"
+  end
+%>
+
+<%
+  columns = query.column_names
+  work_packages = query.results.work_packages
+%>
+
+<% if work_packages && work_packages.any? %>
+  <div class="generic-table--container">
+    <div class="generic-table--results-container">
+      <table class="generic-table work_packages colored-table">
+        <colgroup>
+          <% columns.each do %>
+            <col highlight-col>
+            <col highlight-col>
+            <col highlight-col>
+            <col highlight-col>
+          <% end %>
+        </colgroup>
+        <thead>
+          <tr>
+            <% columns.each do |property, _| %>
+            <th>
+              <div class="generic-table--sort-header-outer">
+                <div class="generic-table--sort-header">
+                  <span>
+                    <%= render_column(property) %>
+                  </span>
+                </div>
+              </div>
+            </th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% work_packages.each do |work_package| %>
+            <tr class="work_package_row-<%= h(work_package.id) %>" class="<%= work_package_css_classes(work_package) %>">
+              <% columns.each do |property| %>
+                <td class="wp-attribute-<%= property %>">
+                  <%= render_wp(property, work_package) %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% else %>
+  <%=
+    title = t("work_packages.list_simple.#{list_for.to_s}.no_results_title_text")
+
+    no_results_box(action_url: work_packages_path,
+                   display_action: true,
+                   custom_title: title,
+                   custom_action_text: t(:label_work_package_view_all))
+  %>
+<% end %>

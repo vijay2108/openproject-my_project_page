@@ -38,12 +38,12 @@ See doc/COPYRIGHT.md for more details.
 <% end %>
 
 <div id="invisible-grid" class="widget-boxes project-overview">
-  <% top_fields.each do |f| %>
-    <%= rendered_field f %>
-  <% end %>
   <div class="grid-block">
     <% middle_fields.each do |f| %>
       <%= rendered_field f %>
     <% end %>
   </div>
+  <% top_fields.each do |f| %>
+    <%= rendered_field f %>
+  <% end %>
 </div>
