@@ -16,6 +16,7 @@ sk:
   label_work_package_tracking: " Work package tracking"
   label_members: "Členovia"
   label_member_view_all: "View all members"
+  label_no_visible_members: "This project has no visible members."
   label_subprojects: "Podprojekty"
   project_page:
     all: "Zobraziť všetko"

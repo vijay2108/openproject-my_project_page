@@ -16,6 +16,7 @@ sv:
   label_work_package_tracking: " Spåra arbetspaket"
   label_members: "Medlemmar"
   label_member_view_all: "View all members"
+  label_no_visible_members: "This project has no visible members."
   label_subprojects: "Delprojekt"
   project_page:
     all: "Visa alla"
