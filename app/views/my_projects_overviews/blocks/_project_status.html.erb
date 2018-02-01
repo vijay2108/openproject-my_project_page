@@ -21,6 +21,28 @@ See doc/COPYRIGHT.md for more details.
 
 <% project_status_cf = ProjectCustomField.where("name LIKE 'Project %'").all %>
 
+<%= javascript_tag do %>
+  function changeColor(el) {
+    if (el.classList.contains('-red')) {
+        el.classList.remove('-red');
+        el.classList.add('-green');
+    } else if (el.classList.contains('-amber')) {
+        el.classList.remove('-amber');
+        el.classList.add('-red');
+    } else if (el.classList.contains('-green')) {
+        el.classList.remove('-green');
+        el.classList.add('-amber');
+    }
+  }
+
+  var statusElements = document.getElementsByClassName('project-status');
+  for(var i = 0; i < statusElements.length; i++) {
+      statusElements[i].addEventListener('click', function(e) {
+        changeColor(e.target);
+      });
+  }
+<% end %>
+
 <h3 class="widget-box--header">
   <%= op_icon('icon-context status-reporting') %>
   <span class="widget-box--header-title">Project status</span>
