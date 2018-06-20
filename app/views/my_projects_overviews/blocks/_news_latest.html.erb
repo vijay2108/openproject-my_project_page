@@ -29,7 +29,7 @@ See doc/COPYRIGHT.md for more details.
 </h3>
 
 <% if recent_news.any? && authorize_for('news', 'index') %>
-  <div class="news overview">
+ <ul class="widget-box--arrow-links news-inner">
     <%= render :partial => 'news/news', :collection => recent_news %>
     <p>
       <%= link_to l(:label_news_view_all),
@@ -45,5 +45,5 @@ See doc/COPYRIGHT.md for more details.
           <span class="button--text"><%= l('activerecord.models.news') %></span>
         <% end %>
     </p>
-  </div>
+  </ul>
 <% end %>
