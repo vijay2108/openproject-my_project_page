@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 See doc/COPYRIGHT.md for more details.
 
 ++#%>
+<div class="overview-page">
 
 <% content_for :header_tags do %>
   <%= auto_discovery_link_tag(:atom, {:controller => 'activities',  :action => 'index', :id => @project, :format => 'atom', :key => User.current.rss_key}) %>
@@ -26,8 +27,32 @@ See doc/COPYRIGHT.md for more details.
 
 <% html_title(t(:label_overview)) -%>
 
+<%
+=begin%>
+ <%= toolbar title: project.name+" "+t(:label_overview) do %>
+<% end %> 
+<%
+=end%>
+
+
 <%= toolbar title: project.name+" "+t(:label_overview) do %>
+  <% if User.current.allowed_to?(:add_project, nil, global: true) %>
+    <li class="toolbar-item">
+      <%= link_to new_project_path,
+          { class: 'button -alt-highlight mt-0',
+            aria: {label: t(:label_project_new)},
+            title: t(:label_project_new)} do %>
+        <%= op_icon('button--icon icon-add') %>
+        <span class="button--text">Create New Project</span>
+      <% end %>
+    </li>
+  <% end %>  
 <% end %>
+
+<div class="toolbar-subtitle mb-20">
+  <span class="project-id">#3593:</span> Created by <a [href]="url">Rafael González</a>. Last updated on <span class="date">03/18/2019 2:24 PM</span>.
+</div>
+
 
 <div id="invisible-grid" class="widget-boxes project-overview">
   <% top_fields.each do |f| %>
@@ -38,4 +63,5 @@ See doc/COPYRIGHT.md for more details.
       <%= rendered_field f %>
     <% end %>
   </div>
+</div>
 </div>

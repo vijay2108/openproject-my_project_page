@@ -30,7 +30,7 @@ See doc/COPYRIGHT.md for more details.
 
 <% if User.current.allowed_to?(:view_work_packages, project) %>
   <div class="issues overview">
-    <ul>
+    <ul class="ml-0">
       <% for type in types %>
         <li><%= link_to h(type.name), project_property_path(project, "type_id", type.id) %>:
           <%= l(:label_x_open_work_packages_abbr_on_total, :count => open_work_packages_by_type[type].to_i,
