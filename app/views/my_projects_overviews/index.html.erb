@@ -38,13 +38,13 @@ See doc/COPYRIGHT.md for more details.
 <%= toolbar title: project.name+" "+t(:label_overview) do %>
   <% if User.current.allowed_to?(:add_project, nil, global: true) %>
     <li class="toolbar-item">
-      <%= link_to new_project_path,
+      <%#= link_to new_project_path,
           { class: 'button -alt-highlight mt-0',
             aria: {label: t(:label_project_new)},
             title: t(:label_project_new)} do %>
-        <%= op_icon('button--icon icon-add') %>
-        <span class="button--text">Create New Project</span>
-      <% end %>
+        <%#= op_icon('button--icon icon-add') %>
+<!--        <span class="button--text">Create New Project</span>-->
+      <%# end %>
     </li>
   <% end %>  
 <% end %>
