@@ -15,6 +15,7 @@ es:
   label_work_packages_watched: "Paquetes de trabajo vistos"
   label_work_package_tracking: " Seguimiento de paquetes de trabajo"
   label_members: "Equipo"
+  button_add_member: "Usuarios"
   label_member_view_all: "Ver todos los usuarios"
   label_no_visible_members: "Este proyecto no tiene usuarios activos."
   label_subprojects: "Subproyectos"
