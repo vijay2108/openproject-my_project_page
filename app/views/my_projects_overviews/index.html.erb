@@ -27,11 +27,11 @@ See doc/COPYRIGHT.md for more details.
 
 <% html_title(t(:label_overview)) -%>
 
-<%
+<%#
 =begin%>
- <%= toolbar title: project.name+" "+t(:label_overview) do %>
-<% end %> 
-<%
+ <%#= toolbar title: project.name+" "+t(:label_overview) do %>
+<%# end %>
+<%#
 =end%>
 
 
@@ -50,7 +50,7 @@ See doc/COPYRIGHT.md for more details.
 <% end %>
 
 <div class="toolbar-subtitle mb-20">
-  <span class="project-id">#3593:</span> Created by <a [href]="url"><%= User.current %></a>.
+  <span class="project-id">#<%= @project.id %>:</span> Created by <a [href]="url"><%= @project.full_name %></a>.
 </div>
 
 
